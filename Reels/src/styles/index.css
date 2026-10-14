@@ -1,0 +1,990 @@
+/* Studio Layout & IDE Workspace */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+@import './whatsapp.css';
+@import './animations.css';
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #0d1117;
+  color: #c9d1d9;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.studio-app {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vw;
+  background: #0d1117;
+}
+
+/* Top Studio Navigation Bar */
+.studio-top-nav {
+  height: 56px;
+  background: #161b22;
+  border-bottom: 1px solid #30363d;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  z-index: 100;
+  flex-shrink: 0;
+}
+
+.studio-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.studio-logo-icon {
+  width: 28px;
+  height: 28px;
+  background: linear-gradient(135deg, #25d366, #128c7e);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-weight: 700;
+  font-size: 15px;
+}
+
+.studio-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: #f0f6fc;
+}
+
+.studio-badge {
+  font-size: 11px;
+  background: rgba(37, 211, 102, 0.15);
+  color: #25d366;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-weight: 600;
+  border: 1px solid rgba(37, 211, 102, 0.3);
+}
+
+.studio-nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.scale-select {
+  background: #21262d;
+  border: 1px solid #30363d;
+  color: #c9d1d9;
+  font-size: 12px;
+  border-radius: 6px;
+  padding: 5px 10px;
+  outline: none;
+  cursor: pointer;
+}
+
+/* Workspace Split */
+.studio-workspace {
+  flex: 1;
+  display: flex;
+  overflow: hidden;
+}
+
+/* Center Canvas Stage */
+.studio-stage-area {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background: radial-gradient(circle at center, #151b23 0%, #0d1117 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.studio-canvas-viewport {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  overflow: hidden;
+  position: relative;
+  background: #090d13;
+}
+
+.studio-canvas-scaler-box {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  overflow: hidden;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(255, 255, 255, 0.08);
+  border-radius: 0px;
+  flex-shrink: 0;
+}
+
+.studio-canvas-scaler {
+  flex-shrink: 0;
+}
+
+/* Pure Edge-to-Edge Mode */
+.studio-app.pure-edge-mode {
+  background: #000000;
+}
+
+.studio-app.pure-edge-mode .studio-canvas-viewport {
+  padding: 0;
+  background: #000000;
+}
+
+.studio-app.pure-edge-mode .studio-canvas-scaler-box {
+  box-shadow: none;
+  border-radius: 0;
+}
+
+.wa-exit-edge-btn {
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  background: rgba(22, 27, 34, 0.85);
+  backdrop-filter: blur(10px);
+  border: 1px solid #30363d;
+  color: #f0f6fc;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 8px 16px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  z-index: 9999;
+  transition: all 0.2s ease;
+}
+
+.wa-exit-edge-btn:hover {
+  background: #da3633;
+  border-color: #f85149;
+}
+
+
+/* Bottom Floating Timeline Toolbar */
+.wa-timeline-toolbar {
+  background: rgba(22, 27, 34, 0.88);
+  backdrop-filter: blur(16px);
+  border-top: 1px solid #30363d;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  gap: 16px;
+  z-index: 50;
+  flex-shrink: 0;
+}
+
+.wa-toolbar-section {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.wa-btn-group {
+  display: flex;
+  background: #21262d;
+  border-radius: 8px;
+  border: 1px solid #30363d;
+  overflow: hidden;
+}
+
+.wa-btn-group .wa-tool-btn {
+  border-radius: 0;
+  border: none;
+}
+
+.wa-tool-btn {
+  background: #21262d;
+  border: 1px solid #30363d;
+  color: #f0f6fc;
+  font-size: 13px;
+  font-weight: 500;
+  padding: 7px 14px;
+  border-radius: 8px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  user-select: none;
+}
+
+.wa-tool-btn:hover:not(:disabled) {
+  background: #30363d;
+  border-color: #8b949e;
+}
+
+.wa-tool-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.wa-tool-btn.icon-only {
+  padding: 7px 10px;
+}
+
+.wa-tool-btn-primary {
+  background: #238636;
+  border-color: #2ea043;
+  color: #fff;
+}
+
+.wa-tool-btn-primary:hover:not(:disabled) {
+  background: #2ea043;
+}
+
+.wa-tool-btn-accent {
+  background: #1f6feb;
+  border-color: #388bfd;
+  color: #fff;
+}
+
+.wa-tool-btn-accent:hover:not(:disabled) {
+  background: #388bfd;
+}
+
+.wa-tool-btn.active {
+  background: #388bfd;
+  border-color: #58a6ff;
+  color: #fff;
+}
+
+.wa-tool-btn.wa-recording-btn {
+  background: #da3633;
+  border-color: #f85149;
+  color: #fff;
+}
+
+.wa-record-dot {
+  width: 8px;
+  height: 8px;
+  background-color: #f85149;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+/* Converting state button (amber) */
+.wa-tool-btn.wa-converting-btn {
+  background: #9e6a03;
+  border-color: #d29922;
+  color: #fff;
+  opacity: 0.9;
+  cursor: not-allowed;
+}
+
+/* Spinning ring shown while ffmpeg converts */
+.wa-convert-spinner {
+  width: 12px;
+  height: 12px;
+  border: 2px solid rgba(255,255,255,0.3);
+  border-top-color: #fff;
+  border-radius: 50%;
+  display: inline-block;
+  animation: wa-spin 0.7s linear infinite;
+  flex-shrink: 0;
+}
+
+@keyframes wa-spin {
+  to { transform: rotate(360deg); }
+}
+
+.progress-section {
+  flex: 1;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.wa-progress-info {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  color: #8b949e;
+  width: 100%;
+}
+
+.wa-step-label strong {
+  color: #f0f6fc;
+}
+
+.wa-timeline-progress-bar {
+  width: 100%;
+  height: 6px;
+  background: #21262d;
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.wa-timeline-progress-fill {
+  height: 100%;
+  background: #25d366;
+  transition: width 0.15s ease;
+}
+
+.wa-speed-chips {
+  display: flex;
+  gap: 4px;
+  background: #21262d;
+  padding: 3px;
+  border-radius: 6px;
+  border: 1px solid #30363d;
+}
+
+.wa-chip {
+  background: transparent;
+  border: none;
+  color: #8b949e;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 4px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.wa-chip.active {
+  background: #30363d;
+  color: #58a6ff;
+}
+
+/* Sidebar Config Panel */
+.studio-sidebar {
+  width: 460px;
+  background: #161b22;
+  border-left: 1px solid #30363d;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.wa-config-panel {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+}
+
+.wa-config-tabs {
+  display: flex;
+  background: #0d1117;
+  border-bottom: 1px solid #30363d;
+  padding: 4px;
+  gap: 4px;
+}
+
+.wa-config-tab-btn {
+  flex: 1;
+  background: transparent;
+  border: none;
+  color: #8b949e;
+  font-size: 12px;
+  font-weight: 500;
+  padding: 8px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.wa-tool-btn.wa-save-highlight-btn {
+  background: #238636;
+  border-color: #2ea043;
+  color: #fff;
+  font-weight: 600;
+}
+
+.wa-tool-btn.wa-save-highlight-btn:hover {
+  background: #2ea043;
+}
+
+.wa-config-save-btn {
+  background: #238636;
+  border: none;
+  color: #fff;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 6px 12px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  margin-left: auto;
+}
+
+.wa-config-save-btn:hover {
+  background: #2ea043;
+}
+
+.wa-config-save-btn.saved {
+  background: #1f6feb;
+}
+
+
+.wa-preset-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  background: #1c2128;
+  border-bottom: 1px solid #30363d;
+  overflow-x: auto;
+}
+
+.wa-preset-label {
+  font-size: 11px;
+  color: #8b949e;
+  white-space: nowrap;
+  font-weight: 600;
+}
+
+.wa-preset-pill {
+  background: #21262d;
+  border: 1px solid #30363d;
+  color: #c9d1d9;
+  font-size: 11px;
+  padding: 4px 10px;
+  border-radius: 12px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.wa-preset-pill:hover {
+  border-color: #58a6ff;
+  color: #58a6ff;
+}
+
+.wa-config-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px;
+}
+
+.wa-config-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.wa-field-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.wa-field-group label,
+.wa-field-row label {
+  font-size: 12px;
+  font-weight: 600;
+  color: #8b949e;
+}
+
+.wa-field-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  align-items: center;
+}
+
+.wa-input,
+.wa-select,
+.wa-textarea {
+  background: #0d1117;
+  border: 1px solid #30363d;
+  color: #f0f6fc;
+  border-radius: 6px;
+  padding: 8px 12px;
+  font-size: 13px;
+  font-family: inherit;
+  outline: none;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.wa-input:focus,
+.wa-select:focus,
+.wa-textarea:focus {
+  border-color: #58a6ff;
+}
+
+.wa-avatar-input-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.wa-avatar-preview-sm {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1px solid #30363d;
+}
+
+.wa-hint {
+  font-size: 11px;
+  color: #8b949e;
+}
+
+.wa-add-btn-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+/* Date shortcut buttons inside expanded system-message editor */
+.wa-date-quick-btn {
+  background: #21262d;
+  border: 1px solid #30363d;
+  color: #c9d1d9;
+  font-size: 12px;
+  font-weight: 500;
+  padding: 5px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.12s ease;
+}
+
+.wa-date-quick-btn:hover {
+  background: #30363d;
+  border-color: #8b949e;
+}
+
+.wa-date-quick-btn.active {
+  background: rgba(88, 166, 255, 0.15);
+  border-color: #58a6ff;
+  color: #58a6ff;
+}
+
+.wa-add-btn {
+  background: #21262d;
+  border: 1px dashed #30363d;
+  color: #c9d1d9;
+  font-size: 12px;
+  font-weight: 500;
+  padding: 8px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.wa-add-btn:hover {
+  background: #30363d;
+  border-color: #58a6ff;
+  color: #58a6ff;
+}
+
+/* Today / Yesterday quick-add buttons — warm amber accent */
+.wa-add-btn.date-today,
+.wa-add-btn.date-yesterday {
+  border-color: rgba(255, 210, 121, 0.35);
+  color: #ffd279;
+}
+
+.wa-add-btn.date-today:hover,
+.wa-add-btn.date-yesterday:hover {
+  background: rgba(255, 210, 121, 0.1);
+  border-color: #ffd279;
+  color: #ffd279;
+}
+
+.wa-message-cards-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.wa-msg-edit-card {
+  background: #0d1117;
+  border: 1px solid #30363d;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.wa-msg-edit-card-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.wa-type-badge {
+  font-size: 10px;
+  text-transform: uppercase;
+  font-weight: 700;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+.wa-type-badge.incoming {
+  background: rgba(83, 189, 235, 0.15);
+  color: #53bdeb;
+}
+
+.wa-type-badge.outgoing {
+  background: rgba(37, 211, 102, 0.15);
+  color: #25d366;
+}
+
+.wa-type-badge.system {
+  background: rgba(255, 210, 121, 0.15);
+  color: #ffd279;
+}
+
+.wa-type-badge.unread-divider {
+  background: rgba(239, 68, 68, 0.15);
+  color: #f85149;
+}
+
+.wa-msg-header-summary {
+  flex: 1;
+  font-size: 12px;
+  color: #c9d1d9;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.wa-msg-header-time {
+  font-size: 11px;
+  color: #8b949e;
+}
+
+.wa-icon-action-btn {
+  background: transparent;
+  border: none;
+  color: #8b949e;
+  padding: 4px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.wa-icon-action-btn:hover {
+  color: #f85149;
+}
+
+.wa-msg-edit-card-body {
+  padding: 12px;
+  border-top: 1px solid #21262d;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background: #161b22;
+}
+
+.wa-color-picker-row {
+  display: flex;
+  gap: 6px;
+}
+
+.wa-color-dot {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  cursor: pointer;
+}
+
+.wa-header-tick-toggle {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  padding: 2px 6px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s ease;
+}
+
+.wa-header-tick-toggle:hover {
+  background: rgba(83, 189, 235, 0.2);
+  border-color: #53bdeb;
+}
+
+.wa-tick-control-group {
+  background: rgba(0, 0, 0, 0.25);
+  border: 1px solid #30363d;
+  border-radius: 8px;
+  padding: 10px;
+}
+
+.wa-tick-group-title {
+  font-size: 11px;
+  text-transform: uppercase;
+  color: #8b949e;
+  font-weight: 700;
+  margin-bottom: 8px;
+  display: block;
+}
+
+.wa-tick-options-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.wa-tick-option-btn {
+  background: #0d1117;
+  border: 1px solid #30363d;
+  border-radius: 6px;
+  padding: 8px 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.15s ease;
+}
+
+.wa-tick-option-btn:hover {
+  background: #21262d;
+  border-color: #8b949e;
+}
+
+.wa-tick-option-btn.active {
+  background: rgba(83, 189, 235, 0.12);
+  border-color: #53bdeb;
+}
+
+.wa-tick-btn-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.wa-tick-main-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: #f0f6fc;
+}
+
+.wa-tick-sub-label {
+  font-size: 10px;
+  color: #8b949e;
+}
+
+/* ==========================================================================
+   REACTION PICKER (Config Panel)
+   ========================================================================== */
+.wa-reaction-group {
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid #30363d;
+  border-radius: 8px;
+  padding: 10px;
+}
+
+.wa-reaction-quick-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 8px;
+}
+
+.wa-reaction-quick-btn {
+  width: 40px;
+  height: 40px;
+  background: #0d1117;
+  border: 1px solid #30363d;
+  border-radius: 8px;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.12s ease;
+  line-height: 1;
+}
+
+.wa-reaction-quick-btn:hover {
+  background: #21262d;
+  border-color: #8b949e;
+  transform: scale(1.15);
+}
+
+.wa-reaction-quick-btn.active {
+  background: rgba(255, 210, 121, 0.12);
+  border-color: #ffd279;
+  box-shadow: 0 0 0 2px rgba(255, 210, 121, 0.25);
+  transform: scale(1.1);
+}
+
+
+.wa-json-editor-view {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.wa-json-textarea {
+  background: #0d1117;
+  border: 1px solid #30363d;
+  color: #58a6ff;
+  font-family: monospace;
+  font-size: 12px;
+  padding: 12px;
+  border-radius: 8px;
+  line-height: 1.4;
+  outline: none;
+  resize: vertical;
+}
+
+.wa-json-error {
+  background: rgba(248, 81, 73, 0.15);
+  border: 1px solid rgba(248, 81, 73, 0.4);
+  color: #f85149;
+  font-size: 12px;
+  padding: 8px 12px;
+  border-radius: 6px;
+}
+
+/* ==========================================================================
+   VIDEO PREVIEW MODAL (PURE 1080x1920 CANVAS)
+   ========================================================================== */
+.wa-video-preview-overlay {
+  position: fixed;
+  inset: 0;
+  background: #000000;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.wa-preview-hover-bar {
+  position: absolute;
+  top: 20px;
+  background: rgba(22, 27, 34, 0.88);
+  backdrop-filter: blur(12px);
+  border: 1px solid #30363d;
+  border-radius: 30px;
+  padding: 6px 18px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  z-index: 10000;
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+.wa-preview-hover-bar.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.wa-preview-btn {
+  background: transparent;
+  border: none;
+  color: #f0f6fc;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.wa-preview-tag {
+  font-size: 12px;
+  color: #8b949e;
+  font-weight: 500;
+}
+
+.wa-preview-close-btn {
+  background: #da3633;
+  border: none;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 5px 12px;
+  border-radius: 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.wa-preview-viewport-center {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.wa-preview-canvas-wrapper {
+  flex-shrink: 0;
+  box-shadow: 0 0 50px rgba(0, 0, 0, 0.9);
+}
+
+/* ==========================================================================
+   DRAG & DROP - Message Card Reordering
+   ========================================================================== */
+
+/* Grip handle icon shown on each message card */
+.wa-drag-handle {
+  display: flex;
+  align-items: center;
+  color: #484f58;
+  cursor: grab;
+  padding: 0 2px;
+  flex-shrink: 0;
+  transition: color 0.12s ease;
+}
+
+.wa-drag-handle:active {
+  cursor: grabbing;
+}
+
+.wa-msg-edit-card:hover .wa-drag-handle {
+  color: #8b949e;
+}
+
+/* Card being dragged: fade it out so the user knows what's moving */
+.wa-msg-edit-card[draggable="true"]:active {
+  opacity: 0.45;
+}
+
+/* Drop indicator lines — drawn as a top or bottom border highlight */
+.wa-msg-edit-card.drag-over-top {
+  border-top: 2px solid #58a6ff;
+  box-shadow: 0 -2px 0 rgba(88, 166, 255, 0.35);
+}
+
+.wa-msg-edit-card.drag-over-bottom {
+  border-bottom: 2px solid #58a6ff;
+  box-shadow: 0 2px 0 rgba(88, 166, 255, 0.35);
+}
+
+/* Slightly highlight the card being hovered over during a drag */
+.wa-msg-edit-card.drag-over-top,
+.wa-msg-edit-card.drag-over-bottom {
+  background: rgba(88, 166, 255, 0.04);
+  transition: border 0.08s ease, background 0.08s ease;
+}
+

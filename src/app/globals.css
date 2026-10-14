@@ -1,26 +1,143 @@
 @import "tailwindcss";
 
+@theme {
+  --font-cormorant: var(--font-cormorant);
+  --font-playfair: var(--font-playfair);
+  --font-inter: var(--font-inter);
+
+  --color-dark-bg: #070B14;
+  --color-slate-bg: #0F172A;
+  
+  --color-accent-gold: #FFD166;
+  --color-accent-pink: #F9A8D4;
+  --color-accent-lavender: #C4B5FD;
+  --color-accent-sky: #7DD3FC;
+  --color-accent-mint: #6EE7B7;
+}
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --background: #070B14;
+  --foreground: #F8FAFC;
 }
 
 body {
-  background: var(--background);
+  background-color: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-inter), sans-serif;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /* Respect device safe areas (notch, home bar) */
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+/* Hide default cursor on desktop devices with mouse capability */
+@media (pointer: fine) {
+  body, 
+  a, 
+  button, 
+  [role="button"],
+  input,
+  select,
+  textarea {
+    cursor: none !important;
+  }
+}
+
+/* Hide scrollbars but keep functionality */
+::-webkit-scrollbar {
+  display: none;
+}
+* {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  box-sizing: border-box;
+}
+
+/* Cinematic film grain overlay */
+.film-grain {
+  position: fixed;
+  top: -50%;
+  left: -50%;
+  right: -50%;
+  bottom: -50%;
+  width: 200%;
+  height: 200%;
+  background: transparent url('data:image/svg+xml,%3Csvg viewBox="0%200%20200%20200"%20xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter%20id="noiseFilter"%3E%3CfeTurbulence%20type="fractalNoise"%20baseFrequency="0.8"%20numOctaves="3"%20stitchTiles="stitch"/%3E%3C/filter%3E%3Crect%20width="100%25"%20height="100%25"%20filter="url(%23noiseFilter)"/%3E%3C/svg%3E') repeat;
+  opacity: 0.04;
+  pointer-events: none;
+  z-index: 9999;
+  animation: grain 8s steps(10) infinite;
+}
+
+@keyframes grain {
+  0%, 100% { transform:translate(0, 0); }
+  10% { transform:translate(-5%, -10%); }
+  20% { transform:translate(-15%, 5%); }
+  30% { transform:translate(7%, -25%); }
+  40% { transform:translate(-5%, 25%); }
+  55% { transform:translate(-15%, -15%); }
+  70% { transform:translate(15%, 15%); }
+  80% { transform:translate(3%, 35%); }
+  90% { transform:translate(-10%, 10%); }
+}
+
+/* Custom styles for texts */
+.cormorant-heading {
+  font-family: var(--font-cormorant), serif;
+}
+
+.playfair-italic {
+  font-family: var(--font-playfair), serif;
+  font-style: italic;
+}
+
+/* Upright Playfair \u2014 used to fix capital J (italic J looks like F) */
+.playfair-normal {
+  font-family: var(--font-playfair), serif;
+  font-style: normal;
+}
+
+/* Ambient glow utility classes */
+.glow-text-gold {
+  text-shadow: 0 0 12px rgba(255, 209, 102, 0.4);
+}
+
+.glow-text-pink {
+  text-shadow: 0 0 12px rgba(249, 168, 212, 0.4);
+}
+
+.glow-text-lavender {
+  text-shadow: 0 0 12px rgba(196, 181, 253, 0.4);
+}
+
+.glow-text-sky {
+  text-shadow: 0 0 12px rgba(125, 211, 252, 0.4);
+}
+
+.glow-text-mint {
+  text-shadow: 0 0 12px rgba(110, 231, 183, 0.4);
+}
+
+/* Lenis default layout CSS */
+html.lenis, html.lenis body {
+  height: auto;
+}
+
+.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis-scrolling iframe {
+  pointer-events: none;
 }
