@@ -4,9 +4,25 @@ import React, { useEffect, useRef, useState } from "react";
 import { Play, Pause, Volume2, VolumeX, CloudRain, Wind, Bird, Music } from "lucide-react";
 
 declare global {
+  interface YouTubePlayer {
+    destroy: () => void;
+    playVideo: () => void;
+    pauseVideo: () => void;
+    setVolume: (volume: number) => void;
+  }
+
   interface Window {
     onYouTubeIframeAPIReady?: () => void;
-    YT?: any;
+    YT?: {
+      Player: new (
+        elementId: string,
+        options: {
+          videoId: string;
+          playerVars: Record<string, number | string>;
+          events: { onReady: (event: { target: YouTubePlayer }) => void };
+        },
+      ) => YouTubePlayer;
+    };
   }
 }
 
@@ -40,7 +56,7 @@ export default function AudioPlayer({ isPlaying, setIsPlaying }: AudioPlayerProp
   const intervalsRef = useRef<Array<ReturnType<typeof setTimeout> | ReturnType<typeof setInterval>>>([]);
 
   // YouTube State & Ref
-  const ytPlayerRef = useRef<any>(null);
+  const ytPlayerRef = useRef<YouTubePlayer | null>(null);
   const [usingReflections, setUsingReflections] = useState(false);
 
   // Load YouTube IFrame API
@@ -73,9 +89,11 @@ export default function AudioPlayer({ isPlaying, setIsPlaying }: AudioPlayerProp
 
   const initYoutubePlayer = () => {
     if (ytPlayerRef.current) return;
+    const YouTube = window.YT;
+    if (!YouTube) return;
 
     try {
-      ytPlayerRef.current = new window.YT.Player("youtube-player", {
+      ytPlayerRef.current = new YouTube.Player("youtube-player", {
         videoId: "x47TgeRJtH0",
         playerVars: {
           autoplay: 0,
@@ -89,7 +107,7 @@ export default function AudioPlayer({ isPlaying, setIsPlaying }: AudioPlayerProp
           playlist: "x47TgeRJtH0",
         },
         events: {
-          onReady: (event: any) => {
+          onReady: (event) => {
             setUsingReflections(true);
             const initialVol = muted ? 0 : volume;
             event.target.setVolume(initialVol * 100);
